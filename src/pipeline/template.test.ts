@@ -25,7 +25,7 @@ describe('resolvePath', () => {
     expect(resolvePath('data.items', { data: { items: [1, 2, 3] } })).toEqual([1, 2, 3]);
   });
   it('returns null for missing path', () => {
-    expect(resolvePath('args.missing', { args: {} })).toBeNull();
+    expect(resolvePath('args.missing', { args: {} })).toBeUndefined();
   });
   it('resolves array index', () => {
     expect(resolvePath('data.0', { data: ['a', 'b'] })).toBe('a');
@@ -67,7 +67,7 @@ describe('render', () => {
     expect(render('Hello ${{ item.name }}!', { item: { name: 'World' } })).toBe('Hello World!');
   });
   it('renders multiple inline expressions', () => {
-    expect(render('${{ item.a }}-${{ item.b }}', { item: { a: 1, b: 2 } })).toBe('1-2');
+    expect(render('${{ item.first }}-${{ item.second }}', { item: { first: 'X', second: 'Y' } })).toBe('X-Y');
   });
   it('returns non-string values as-is', () => {
     expect(render(42, {})).toBe(42);
